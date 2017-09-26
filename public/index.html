@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ChipIn</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.min.js"></script>
+</head>
+<body >
+  <div id="app">
+    <h1 class="main-title">Chip<span>In</span></h1>
+    <job-wrapper
+    v-bind:job-list="jobs"
+    v-bind:current-job="0">
+
+    </job-wrapper>
+  </div>
+
+  <script type="text/x-template" id="job-wrapper-template">
+    <div class="job-wrapper">
+      <job-item v-bind:details="jobList[currentJob]">
+      </job-item>
+      <button class="job-next" v-on:click="nextJob"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M17.525 36.465l-7.071 7.07c-4.686 4.686-4.686 12.284 0 16.971L205.947 256 10.454 451.494c-4.686 4.686-4.686 12.284 0 16.971l7.071 7.07c4.686 4.686 12.284 4.686 16.97 0l211.051-211.05c4.686-4.686 4.686-12.284 0-16.971L34.495 36.465c-4.686-4.687-12.284-4.687-16.97 0z"/></svg></button>
+      <button class="job-last" v-on:click="prevJob"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path d="M238.475 475.535l7.071-7.07c4.686-4.686 4.686-12.284 0-16.971L50.053 256 245.546 60.506c4.686-4.686 4.686-12.284 0-16.971l-7.071-7.07c-4.686-4.686-12.284-4.686-16.97 0L10.454 247.515c-4.686 4.686-4.686 12.284 0 16.971l211.051 211.05c4.686 4.686 12.284 4.686 16.97-.001z"/></svg></button>
+    </div>
+  </script>
+
+  <script type="text/x-template" id="job-template">
+    <div class="job">
+
+      <div class="job-title">
+        <span class="title-back" v-on:click="back">BACK</span>
+        <h1 class="title-main">{{details.title}}</h1>
+        <h2 class="title-sub">{{details.org}}</h2>
+        <div class="title-time">
+          <h5>Time Required</h5>
+          <h2>{{details.time}}</h2>
+        </div>
+      </div>
+
+
+      <div class="job-details-small">
+        <div class="details">
+          <h3>About This Oppertunity</h3>
+          <p>{{details.smallDetails}}</p>
+          <div class="job-details-hidden">
+            <h3>What You Need</h3>
+            <p>{{details.need}}</p>
+
+            <h3>What You Get</h3>
+            <p>{{details.get}}</p>
+
+            <h3>Who You Meet</h3>
+            <p>{{details.meet}}</p>
+
+            <h3>Impact You Make</h3>
+            <p>{{details.impact}}</p>
+
+            <h3>Contact</h3>
+            <p>{{details.contact}}</p>
+            <p v-if="details.email">Email: <a :href="'mailto:'+ details.email">{{details.email}}</a></p>
+            <p v-if="details.tel">Tel: <a :href="'tel:'+ details.tel">{{details.tel}}</a></p>
+            <p v-if="details.url">Website: <a :href="details.url">{{details.url}}</a></p>
+          </div>
+        </div>
+        <div class="job-action" v-on:click="expand">
+          <h3>More</h3>
+        </div>
+      </div>
+
+    </div>
+  </script>
+  <script type="text/javascript" src="/app.js"></script>
+</body>
+</html>
